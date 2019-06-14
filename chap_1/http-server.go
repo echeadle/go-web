@@ -12,7 +12,7 @@ const (
 )
 
 func helloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hellow World!")
+	fmt.Fprintf(w, "Hello World!")
 }
 
 func main() {

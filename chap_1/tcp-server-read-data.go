@@ -14,7 +14,7 @@ const (
 )
 
 func handleRequest(conn net.Conn) {
-	message, error := bufio.NewReader(conn).ReadString('\n')
+	message, err := bufio.NewReader(conn).ReadString('\n')
 
 	if err != nil {
 		log.Fatal("Error reading:", err.Error())

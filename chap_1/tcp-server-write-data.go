@@ -13,16 +13,6 @@ const (
 	CONN_TYPE = "tcp"
 )
 
-func handleRequest(conn net.Conn) {
-	message, err := bufio.NewReader(conn).ReadString('\n')
-
-	if err != nil {
-		log.Fatal("Error reading:", err.Error())
-	}
-	fmt.Println("Message Received from the client: ", string(message))
-	conn.Close()
-}
-
 func main() {
 	listener, err := net.Listen(CONN_TYPE, CONN_HOST+":"+CONN_PORT)
 	if err != nil {
@@ -37,4 +27,16 @@ func main() {
 		}
 		go handleRequest(conn)
 	}
+}
+
+func handleRequest(conn net.Conn) {
+	message, err := bufio.NewReader(conn).ReadString('\n')
+
+	if err != nil {
+		log.Println("Error reading:", err.Error())
+	}
+	conn.Write([]byte(message + "\n"))
+	fmt.Print("Message Received:", string(message))
+	conn.Close()
+}
 }
